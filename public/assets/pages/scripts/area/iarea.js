@@ -5,7 +5,7 @@ $(document).ready(function () {
             _token: $('input[name=_token]').val()
         };
         $.ajax({
-            url: 'area',
+            url: '/area/guardar-menu',
             type: 'POST',
             dataType: 'JSON',
             data: data,
