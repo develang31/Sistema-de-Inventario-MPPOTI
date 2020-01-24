@@ -21,6 +21,11 @@ Areas
   <div class="card card-success">
    <div class="card-header with-border">
     <h3 class="card-title">Areas</h3>
+    <div class="card-tools pull-right">
+        <a href="{{route('area.create')}}" class="btn btn-block btn-success btn-sm">
+        <i class="fa fa-fw fa-plus-circle"></i> Nuevo registro
+        </a>
+    </div>
    </div> 
    <div class="card-body">
     @csrf

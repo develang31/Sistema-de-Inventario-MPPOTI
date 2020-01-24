@@ -24,7 +24,7 @@ class ValidacionSede extends FormRequest
     public function rules()
     {
         return [
-            'nombre_sede'=>'required|max:15'
+            'nombre_sede' => 'required|max:50|'
         ];
     }
 }

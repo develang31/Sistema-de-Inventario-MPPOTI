@@ -15,6 +15,8 @@ class SedeController extends Controller
     public function index()
     {
         //
+        $isede = Sede::orderBy('id_sede')->get();
+        return view('sede.isede', compact('isede'));
     }
 
     /**
@@ -37,7 +39,7 @@ class SedeController extends Controller
     public function store(ValidacionSede $request)
     {
         Sede::create($request->all());
-	return redirect('sede/create')->with('mensaje','Sede creado correctamente');
+	    return redirect('sede/create')->with('mensaje','Sede creado correctamente');
     }
 
     /**
@@ -57,9 +59,10 @@ class SedeController extends Controller
      * @param  \App\Model\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sede $sede)
+    public function edit($id)
     {
-        //
+        $data=Sede::findOrFail($id);//where('id_sede',$id)->get();
+        return view('sede.editar', compact('data'));
     }
 
     /**
@@ -69,9 +72,10 @@ class SedeController extends Controller
      * @param  \App\Model\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sede $sede)
+    public function update(ValidacionSede $request, $id)
     {
-        //
+        Sede::findOrFail($id)->update($request->all());
+        return redirect('sede')->with('mensaje', 'Rol actualizado con exito');
     }
 
     /**
@@ -82,6 +86,14 @@ class SedeController extends Controller
      */
     public function destroy(Sede $sede)
     {
-        //
+        if ($request->ajax()) {
+            if (Sede::destroy($id)) {
+                return response()->json(['mensaje' => 'ok']);
+            } else {
+                return response()->json(['mensaje' => 'ng']);
+            }
+        } else {
+            abort(404);
+        }
     }
 }
