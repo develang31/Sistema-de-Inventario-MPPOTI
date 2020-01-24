@@ -89,7 +89,7 @@ class AreaController extends Controller
     public function guardarOrden(Request $request)
     {
         if ($request->ajax()) {
-            $menu = new Area();
+            $menu = new Area;
             $menu->guardarOrden($request->menu);
             return response()->json(['respuesta' => 'ok']);
         } else {
