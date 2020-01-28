@@ -11,7 +11,7 @@ Sedes
 <div class="row">
     <div class="col-lg-12">
         @include('includes.mensaje')
-        <div class="card card-success">
+        <div class="card">
             <div class="card-header with-border">
                 <h3 class="card-title">Sedes</h3>
                 <div class="card-tools pull-right">
@@ -34,11 +34,11 @@ Sedes
                             <td>{{$data->nombre_sede}}</td>
                             <td>
                             <a href="{{route('sede.edit', $data->id_sede)}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
-                                    <i class="fa fa-fw fa-pencil"></i>
+                                    <i class="fa fa-fw  fa-edit"></i>
                                 </a>
                                 <form action="{{route('sede.destroy', $data->id_sede)}}" class="d-inline form-eliminar" method="POST">
                                 {{ csrf_field() }} @method("delete")
-                                    <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">
+                                    <button type="submit"  class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">
                                         <i class="fa fa-fw fa-trash text-danger"></i>
                                     </button>
                                 </form>

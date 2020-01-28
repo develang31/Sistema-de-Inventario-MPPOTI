@@ -39,7 +39,7 @@ class SedeController extends Controller
     public function store(ValidacionSede $request)
     {
         Sede::create($request->all());
-	    return redirect('sede/create')->with('mensaje','Sede creado correctamente');
+	    return redirect('sede')->with('mensaje','Sede creado correctamente');
     }
 
     /**
@@ -84,7 +84,7 @@ class SedeController extends Controller
      * @param  \App\Model\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sede $sede)
+    public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
             if (Sede::destroy($id)) {

@@ -25,10 +25,10 @@
                 {{ csrf_field() }}
                 {{method_field('put')}}
 
-                <div class="box-body">
+                <div class="card-body">
                     @include('sede.form')
                 </div>
-                <div class="box-footer">
+                <div class="card-footer">
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">
                         @include('includes.edit-button-form')

@@ -18,10 +18,11 @@
  <link rel="stylesheet" href="{{asset("assets/$theme/plugins/select2/css/select2.min.css")}}">
  <link rel="stylesheet" href="{{asset("assets/$theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">	
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
  @yield('styles')
 
  <link rel="stylesheet" href="{{asset("assets/css/custom.css")}}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  </head> 	
  
 <body class="hold-transition sidebar-mini layout-boxed"> 
@@ -63,6 +64,9 @@
   <script src="{{asset("assets/js/script.js")}}"></script>
   <script src="{{asset("assets/js/funciones.js")}}"></script>
   @yield("scripts") 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+ 
 <script>
   $(function () {
     //Initialize Select2 Elements
