@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Cargo;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ValidacionCargo;
 class CargoController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class CargoController extends Controller
      */
     public function index()
     {
-        //
+	$icargo=Cargo::OrderBy('id_cargo')->get();
+        return view('cargo.icargo',compact('icargo'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CargoController extends Controller
      */
     public function create()
     {
-        //
+        return view('cargo.create');
     }
 
     /**
@@ -33,9 +34,10 @@ class CargoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidacionCargo $request)
     {
-        //
+        Cargo::create($request->all());
+	return redirect('cargo')->with('mensaje','Cargo creado con éxito');
     }
 
     /**
@@ -55,9 +57,10 @@ class CargoController extends Controller
      * @param  \App\Model\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cargo $cargo)
+    public function edit($id)
     {
-        //
+	$data=Cargo::findOrFail($id);
+	return view('cargo.editar',compact('data'));
     }
 
     /**
@@ -67,9 +70,10 @@ class CargoController extends Controller
      * @param  \App\Model\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargo $cargo)
+    public function update(ValidacionCargo $request,$id)
     {
-        //
+        Cargo::findOrFail($id)->update($request->all());
+	return redirect('cargo')->with('mensaje','Cargo actualizado correctamente');
     }
 
     /**
@@ -78,8 +82,17 @@ class CargoController extends Controller
      * @param  \App\Model\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargo $cargo)
+    public function destroy(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+	 if(Cargo::destroy($id)){
+	 return response()->json(['mensaje'=>'ok']);
+	 }
+	 else{
+	 return response()->json(['mensaje'=>'ng']);
+	 }
+	}else {
+	  abort(404);
+	}
     }
 }
