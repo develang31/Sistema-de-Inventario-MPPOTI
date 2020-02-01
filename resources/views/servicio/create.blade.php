@@ -1,31 +1,37 @@
 @extends("theme.$theme.layout")
 @section('titulo') 
-	Servicios
+Servicios
+@endsection
+@section("scripts")
+<script src="{{asset("assets/pages/scripts/crear.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
-<div class="row"> 
-	<div class="col-lg-12">
-		 @include('includes.form-error') 
-		@include('includes.mensaje') 
-		<div class="card card-info">
-			 <div class="card-header with-border"> 
-				<h3 class="card-title">Crear Servicios</h3> 
-					<a href="{{route('servicio')}}" class="btn btn-info   btn-smpull-right">Listado</a> 
-			</div> 
-	 <form  class="form-horizontal" action="{{route('servicio.store')}}" method="POST">
-	  {{ csrf_field() }}
-		<div class="card-body">
-			@include('servicio.form')
-		</div>
-		<div class="card-footer">
-                  <div class="col-lg-3"></div> 
-				<div class="col-lg-6"> 
-					@include('includes.boton-form-crear')
-				 </div>
-                </div>
-             
-	 	   </form> 
-		</div>
-	</div>
+<div class="row">
+ <div class="col-lg-12">
+  @include('includes.form-error') 
+  @include('includes.mensaje') 
+  <div class="card card-info">
+   <div class="card-header with-border"> 
+    <h3 class="card-title">Crear Servicios</h3>
+    <div class="card-tools pull-right">
+     <a href="{{route('servicio.index')}}" class="btn btn-block btn-info btn-sm">
+     <i class="fa fa-fw fa-reply-all"></i> Volver al listado
+     </a>
+    </div> 
+   </div> 
+   <form  class="form-horizontal" action="{{route('servicio.store')}}" method="POST">
+    {{ csrf_field() }}
+    <div class="card-body">
+     @include('servicio.form')
+    </div>
+    <div class="card-footer">
+    <div class="col-lg-3"></div> 
+    <div class="col-lg-6"> 
+     @include('includes.create-button-form')
+    </div>
+    </div>
+   </form> 
+  </div>
+ </div>
 </div>
 @endsection

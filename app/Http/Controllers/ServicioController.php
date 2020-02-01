@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Servicio;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ValidacionServicio;
 class ServicioController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        //
+        $iservicio=Servicio::OrderBy('id_servicio')->get();
+        return view('servicio.iservicio',compact('iservicio'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
+        return view('servicio.create');
     }
 
     /**
@@ -33,9 +34,11 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidacionServicio $request)
     {
-        //
+        Servicio::create($request->all());
+	return redirect('servicio')->with('mensaje','Servicio creado con éxito');
+
     }
 
     /**
@@ -55,9 +58,11 @@ class ServicioController extends Controller
      * @param  \App\Model\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicio $servicio)
+    public function edit($id)
     {
-        //
+        $data=Servicio::findOrFail($id);
+	return view('servicio.editar',compact('data'));
+
     }
 
     /**
@@ -67,9 +72,10 @@ class ServicioController extends Controller
      * @param  \App\Model\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servicio $servicio)
+    public function update(ValidacionServicio $request,$id)
     {
-        //
+        Servicio::findOrFail($id)->update($request->all());
+	return redirect('servicio')->with('mensaje','Servicio actualizado con exito');
     }
 
     /**
@@ -78,8 +84,17 @@ class ServicioController extends Controller
      * @param  \App\Model\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servicio $servicio)
+    public function destroy(Request $request,$id)
     {
-        //
+        if($request->ajax()){
+	 if(Servicio::destroy($id)){
+	 return response()->json(['mensaje'=>'ok']);
+	 }
+	 else{
+	 return response()->json(['mensaje'=>'ng']);
+	 }
+	}else {
+	  abort(404);
+	}
     }
 }

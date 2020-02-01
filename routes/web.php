@@ -16,3 +16,4 @@ Route::resource('sede','SedeController');
 Route::resource('cargo','CargoController');
 Route::resource('area','AreaController');
 Route::post('area/guardar-orden', 'AreaController@guardarOrden')->name('guardar_orden');
+Route::resource('servicio','ServicioController');
